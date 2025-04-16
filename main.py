@@ -6,9 +6,7 @@ import collections
 import argparse
 import os
 
-def calculate_years_together(start_date):
-    date_today = datetime.date.today()
-    delta = date_today.year - start_date.year
+def calculate_years_together(delta):
     if delta % 100 > 10 and delta % 100 < 20: 
         return f'Уже {delta} лет вместе'
     elif delta % 10 == 1:
@@ -25,12 +23,16 @@ def main():
     )
 
     start_date = datetime.date(1920, 1, 1)
-    age_vinery = calculate_years_together(start_date)
+    date_today = datetime.date.today()
+    delta = date_today.year - start_date.year
+    age_vinery = calculate_years_together(delta)
 
     parser = argparse.ArgumentParser(description='Загрузите данные из файла Excel.')
     parser.add_argument('filepath', type=str, help='Путь к файлу wine3.xlsx')
     args = parser.parse_args()
     filepath = args.filepath if args.filepath else os.getenv('WINE_FILEPATH')
+    print(filepath)
+
     template = env.get_template('template.html')
     
     excel_data_df = pandas.read_excel(filepath,na_values=['N/A', 'NA'], keep_default_na=False)
