@@ -30,8 +30,10 @@ def main():
     parser = argparse.ArgumentParser(description='Загрузите данные из файла Excel.')
     parser.add_argument('filepath', type=str, help='Путь к файлу wine3.xlsx')
     args = parser.parse_args()
-    filepath = args.filepath if args.filepath else os.getenv('WINE_FILEPATH')
-    print(filepath)
+    if args.filepath:
+        filepath = args.filepath
+    else:
+        filepath = os.getenv('WINE_FILEPATH')
 
     template = env.get_template('template.html')
     
