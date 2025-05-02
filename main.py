@@ -28,7 +28,7 @@ def main():
     age_vinery = calculate_years_together(delta)
 
     parser = argparse.ArgumentParser(description='Загрузите данные из файла Excel.')
-    parser.add_argument('filepath', type=str, help='Путь к файлу wine3.xlsx')
+    parser.add_argument('filepath', nargs='?', type=str, help='Путь к файлу wine3.xlsx')
     args = parser.parse_args()
     if args.filepath:
         filepath = args.filepath
