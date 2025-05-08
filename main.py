@@ -38,10 +38,9 @@ def main():
         help='Путь к файлу Excel (по умолчанию: wine3.xlsx)'
     )
     args = parser.parse_args()
-    if args.filepath:
-        filepath = args.filepath
-    else:
-        filepath = os.getenv('WINE_FILEPATH')
+    filepath = args.filepath or os.getenv('WINE_FILEPATH')
+    if filepath is None:
+        raise KeyError("Переменная окружения 'WINE_FILEPATH' не задана и не передан аргумент.")
 
     template = env.get_template('template.html')
 
